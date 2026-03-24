@@ -2,12 +2,48 @@
  * F1 Ticket Booking System - Final script.js
  */
 
-// 1. AUTOMATICALLY LOAD DATA WHEN PAGE OPENS
+// ==========================================
+// 1. ROLEX COUNTDOWN TIMER LOGIC
+// ==========================================
+
+// Set the date we're counting down to (F1 2026 Season Finale - Estimated)
+const countDownDate = new Date("Dec 6, 2026 15:00:00").getTime();
+
+// Update the countdown every 1 second
+const timerInterval = setInterval(function() {
+
+    // Get today's date and time
+    const now = new Date().getTime();
+
+    // Find the distance between now and the countdown date
+    const distance = countDownDate - now;
+
+    // Time calculations for days, hours, minutes and seconds
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Display the result in the corresponding HTML elements
+    // We add a "0" in front of single digit numbers for a cleaner clock look
+    document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+    document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+    document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+    document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+
+    // If the countdown is finished, write some text 
+    if (distance < 0) {
+        clearInterval(timerInterval);
+        document.getElementById("rolexTimer").innerHTML = "<h3 style='color: #A37E2C;'>SEASON CONCLUDED</h3>";
+    }
+}, 1000);
+
+// 2. AUTOMATICALLY LOAD DATA WHEN PAGE OPENS
 window.onload = function() {
     loadBookings();
 };
 
-// 2. FETCH ALL BOOKINGS FROM DATABASE
+// 3. FETCH ALL BOOKINGS FROM DATABASE
 function loadBookings() {
     // We call action.php with a GET request to 'contest'
     fetch("action.php?action=contest")
