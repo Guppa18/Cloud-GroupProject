@@ -17,7 +17,7 @@ The application shifts away from single-point-of-failure hosting by utilizing a 
 The repository follows a standard three-tier web application architecture (Presentation, Application, and Data layers).
 
 ### 2.1 Presentation Layer (Front-End)
-* **`F1.html`**: The primary user interface. It contains the structural markup for the data submission form, the dynamic data display table, and embedded CSS. It also features a programmatic countdown timer calculating the time remaining until the final race of the season.
+* **`f1-frontend.html`**: The primary user interface. It contains the structural markup for the data submission form, the dynamic data display table, and embedded CSS. It also features a programmatic countdown timer calculating the time remaining until the final race of the season.
 * **`script.js`**: The client-side logic handler. It executes asynchronous JavaScript (AJAX) via the Fetch API to communicate with the backend without requiring page reloads. It handles form validation, DOM manipulation for the countdown timer, and the dynamic rendering of database records upon window load.
 * **Static Assets**: Includes `Background.png` and `f1.jpg` for UI enhancement.
 
@@ -32,7 +32,7 @@ The repository follows a standard three-tier web application architecture (Prese
 The lifecycle of a user transaction follows these steps:
 1.  **Client Request:** The user accesses the application via the Application Load Balancer's public DNS record.
 2.  **Traffic Routing:** The ALB verifies target health via `health.html` and forwards the request to an available EC2 instance.
-3.  **Initialization:** Upon loading `F1.html`, `script.js` immediately triggers a `GET` request to `action.php`.
+3.  **Initialization:** Upon loading `f1-frontend.html`, `script.js` immediately triggers a `GET` request to `action.php`.
 4.  **Data Retrieval:** `action.php` queries the RDS instance via `db.php`, retrieves all existing booking records as an associative array, and returns them to the client as a JSON response.
 5.  **Data Ingestion:** When a user submits a new booking, `script.js` validates the input and sends a `POST` request. The backend sanitizes the inputs and executes an `INSERT` SQL statement to the RDS database.
 6.  **State Update:** The database returns a success confirmation, prompting the frontend JavaScript to append the new record directly into the Document Object Model (DOM).
