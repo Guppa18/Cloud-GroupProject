@@ -1,5 +1,5 @@
 <?php
-define('DB_SERVER', 'f1tickets.cntbvydiscc4.us-east-1.rds.amazonaws.com');
+define('DB_SERVER', 'YOUR ENDPOINT');
 define('DB_USERNAME', 'admin');
 define('DB_PASSWORD', 'Password');
 define('DB_DATABASE', 'f1tickets');
